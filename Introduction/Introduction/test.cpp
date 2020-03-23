@@ -1,12 +1,4 @@
 #if 0
-#include<iostream>
-int main()
-{
-	std::cout << "hello world" << std::endl;
-	return 0;
-}
-
-
 #define _CRT_SECURE_NO_WARNINGS
 #include<iostream>
 
@@ -25,7 +17,7 @@ int main()
 	cout << a << ", " << b << endl;
 	return 0;
 }
-#endif
+
 
 #include<iostream>
 #include<stdio.h>
@@ -83,5 +75,23 @@ int main()
 	std::cout << N1::Add(1, 2) << std::endl;
 	std::cout << N1::Mul(1, 2) << std::endl;
 	printf("%d\n", N2::N3::c);
+	return 0;
+}
+#endif
+
+#include<iostream>
+
+using std::cout;
+using std::endl;
+int main()
+{
+	double a = 1.11;
+	int b = 1;
+	double *p = &a;
+
+	cout << "hello world" << endl;  // end1 »»ĞĞ·û
+	cout << a << endl;
+	cout << b << endl;
+	cout << *p << endl;
 	return 0;
 }
