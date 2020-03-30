@@ -58,19 +58,56 @@ int main()
 }
 #endif
 
-void TestFor()
+void TestFor1()
 {
 	int array[] = { 1, 2, 3, 4, 5 };
 	for (int i = 0; i < sizeof(array) / sizeof(array[0]); ++i)
 		array[i] *= 2;
 	for (int* p = array; p < array + sizeof(array) / sizeof(array[0]); ++p)
-		cout << *p << endl;
+		cout << *p << " ";
 }
 
+void TestFor2()
+{
+	int array[] = { 1, 2, 3, 4, 5 };
+	for (auto& e : array)
+		e *= 2;
+	for (auto e : array)
+		cout << e << " ";
+}
+
+/*
 int main()
 {
 	int i = 0;
 	double d = i; // 隐式类型的转换
-	const double& rd = i;
+	const double& rd = i;// 隐式常量
+	cout << d << d;
+	cout << endl;
+
+	TestFor1(); // C语言用法
+	cout << endl;
+
+	TestFor2(); // C++11用法
+	cout << endl;
 	return 0;
 }
+*/
+
+void f(int)
+{
+	cout << "f(int)" << endl;
+}
+
+void f(int*)
+{
+	cout << "f(int*)" << endl;
+}
+
+int main()
+{
+	f(0);
+	f(NULL);
+	f(nullptr); // C++11 统一使用 nullptr
+	return 0;
+}	// 空指针定义
