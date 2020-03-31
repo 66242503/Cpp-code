@@ -11,9 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{FEEB7D09-715E-45E9-86B5-1266DC16323D}</ProjectGuid>
+    <ProjectGuid>{1F892F62-1F89-40CF-AEBE-EB3F970CFF28}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>ClassOJ</RootNamespace>
+    <RootNamespace>Class</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
