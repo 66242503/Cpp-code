@@ -1,6 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS 1
-#include<iostream>
-#include<string.h>
+#include <iostream>
+#include <string.h>
 
 using namespace std;
 
@@ -64,13 +64,57 @@ int main()
 }
 */
 
+// 1.下面程序能编译通过吗？
+// 2.下面程序会崩溃吗？在哪里崩溃
+class A
+{
+public:
+	void PrintA()
+	{
+		cout << _a << endl;
+	}
+	void Show()
+	{
+		cout << "Show()" << endl;
+	}
+private:
+	int _a;
+};
+
+/*
+int main()
+{
+	A* p = NULL;
+	// p->PrintA();	// 崩溃
+	p->Show();	// 正常运行
+	return 0;
+}
+*/
+
 class Date
 {
 public:
+	Date(int year, int month, int day)
+	{
+		_year = year;
+		_month = month;
+		_day = day;
+	}	// 构造函数
+
+	// Date
+	// 两个构造函数构成函数重载
+	Date()
+	{
+		_year = 1900;
+		_month = 1;
+		_day = 1;
+	}
+
 	void Display()
 	{
 		cout << _year << "-" << _month << "-" << _day << endl;
 	}
+
 	void SetDate(int year, int month, int day)
 	{
 		_year = year;
@@ -85,10 +129,11 @@ private:
 
 int main()
 {
-	Date d1, d2;
-	d1.SetDate(2020, 4, 1);
-	d2.SetDate(2020, 3, 31);
+	Date d1(2020, 4, 1);
 	d1.Display();
+	Date d2(2020, 4, 2);
 	d2.Display();
+	Date d3;
+	d3.Display();
 	return 0;
 }	// 日期类
