@@ -5,6 +5,7 @@
 
 using namespace std;
 
+#if 0
 struct Student
 {
 	void SetStudentInfo(const char* name, const char* gender, int age)
@@ -200,7 +201,7 @@ public:
 			_capacity = 0;
 			_size = 0;
 		}
-	}
+	}	// 析构函数
 private:
 	int* _pData;
 	size_t _size;
@@ -234,5 +235,29 @@ int main()
 	Person p;
 	return 0;
 }
+#endif
 
-
+class Date
+{
+public:
+	Date(int year = 1900, int month = 1, int day = 1)
+	{
+		_year = year;
+		_month = month;
+		_day = day;
+	}
+private:
+	int _year;
+	int _month;
+	int _day;
+};
+int main()
+{
+	Date d1;
+	Date d2(d1);	// d2是第一的构造
+	// Date d2 = d1;
+	int i = 10;
+	int j(i);
+	// int j = i;
+	return 0;
+}	// 拷贝构造
