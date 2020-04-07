@@ -246,18 +246,30 @@ public:
 		_month = month;
 		_day = day;
 	}
+
+	bool operator==(const Date& d)
+	{
+		return _year == d._year
+			&& _month == d._month
+			&& _day == d._day;
+	}
 private:
 	int _year;
 	int _month;
 	int _day;
 };
+
 int main()
 {
 	Date d1;
 	Date d2(d1);	// d2是第一的构造
 	// Date d2 = d1;
+
 	int i = 10;
 	int j(i);
 	// int j = i;
+
+	cout << (d1 == d2) << endl;
+
 	return 0;
-}	// 拷贝构造
+}
