@@ -23,7 +23,7 @@ public:
 	Date(int year = 1900, int month = 1, int day = 1)
 	{
 		if (year >= 0 && month > 0 && month < 13
-			&& day > 0 && day < GetMonthDay(year, month))
+			&& day > 0 && day <= GetMonthDay(year, month))
 		{
 			_year = year;
 			_month = month;
@@ -51,11 +51,30 @@ public:
 
 
 	// 日期+=天数
-	Date& operator+=(int day);
+	Date& operator+=(int day)
+	{
+
+		return *this;
+	}
 
 
 	// 日期+天数
-	Date operator+(int day);
+	Date operator+(int day)
+	{
+		Date ret(*this); // *this是d1，ret相当于d1的拷贝
+		ret._day += day;
+		while (ret._day > GetMonthDay(ret._year, ret._month))
+		{
+			ret._day -= GetMonthDay(ret._year, ret._month);
+			ret._month++;
+			if (ret._month == 13)
+			{
+				ret._year++;
+				ret._month = 1;
+			}
+		}
+		return ret;
+	}
 
 
 	// 日期-天数
