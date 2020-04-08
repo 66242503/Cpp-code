@@ -35,19 +35,36 @@ public:
 		}
 
 	}
+	void Print()
+	{
+		cout << _year << "-" << _month << "-" << _day << endl;
+	}
+
 
 	// 拷贝构造函数
 	// d2(d1)
-	Date(const Date& d);
-
+	Date(const Date& d)
+	{
+		_year = d._year;
+		_month = d._month;
+		_day = d._day;
+	}
 
 	// 赋值运算符重载
 	// d2 = d3 -> d2.operator=(&d2, d3)
-	Date& operator=(const Date& d);
-
+	Date& operator=(const Date& d)
+	{
+		_year = d._year;
+		_month = d._month;
+		_day = d._day;
+		return *this;
+	}
 
 	// 析构函数
-	~Date();
+	~Date()
+	{
+		cout << "~Date()" << endl;
+	}
 
 
 	// 日期+=天数
@@ -136,5 +153,15 @@ private:
 
 int main()
 {
+	Date d1;	
+	d1.Print();
+	Date d2(2021,2,29);
+	Date d3(d1);
+	Date d4(2021, 4, 8);
+	d1 = d4;
+	d3.Print();
+	d4.Print();
+	d1.Print();
+
 	return 0;
 }
