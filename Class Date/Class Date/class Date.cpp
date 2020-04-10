@@ -214,29 +214,24 @@ public:
 	// 日期-日期 返回天数
 	int operator-(const Date& d)
 	{
+		int flag = -1;
 		int count = 0;
-		if (*this == d)
+		Date min = *this;
+		Date max = d;
+
+		if (*this > d)
 		{
-			count = 0;
+			flag = 1;
+			min = d;
+			max = *this;
 		}
 
-		else if (*this > d)
+		while (min < max)
 		{
-			while (*this > d)
-			{
-				--*this;
-				count++;
-			}
+			++min;
+			++count;
 		}
-		else
-		{
-			while (*this < d)
-			{
-				++*this;
-				count--;
-			}
-		}
-		return count;
+		return count * flag;
 	}
 
 
@@ -251,6 +246,7 @@ private:
 	int _month;
 	int _day;
 };
+
 
 void test1()
 {
@@ -285,10 +281,10 @@ void test2()
 
 void test3()
 {
-	Date d1(2021, 4, 1);
-	Date d2(2020, 4, 1);
+	Date d1(2020, 12, 19);
+	Date d2(2020, 4, 10);
 	int ret = d1 - d2;
-	cout << ret << endl;
+	cout << "距离考研还剩" << ret << "天" << endl;
 }
 
 int main()
