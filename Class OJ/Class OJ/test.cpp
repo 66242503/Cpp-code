@@ -75,15 +75,30 @@ int main()
 */
 
 #include <iostream>
-
 using namespace std;
+int cal(int date)
+{
+	int Monthdays[12] = { 0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334 };
+	int year = date / 10000; // 获取年
+	int month = (date / 100) % 100; // 获取月
+	int day = date % 100; // 获取日
+	int res = year * 365 + year / 4 - year / 100 + year / 400
+		+ Monthdays[month - 1] + day; // 计算与0000年0月1日的差值
 
-int Date1, Date2;
+	if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0 && month < 2)
+		res--;
+	return res;
+}
+
 int main()
 {
+	int Date1, Date2;
 	while (cin >> Date1 >> Date2)
 	{
-		cout << 397 << endl;
+		int d1 = cal(Date1);
+		int d2 = cal(Date2);
+		int ret = abs(d2 - d1) + 1;
+		cout << ret << endl;
 	}
 	return 0;
 }
