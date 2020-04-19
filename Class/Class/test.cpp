@@ -235,7 +235,7 @@ int main()
 	Person p;
 	return 0;
 }
-#endif
+
 
 class Date
 {
@@ -262,8 +262,8 @@ private:
 int main()
 {
 	Date d1;
-	Date d2(d1);	// d2是第一的构造
-	// Date d2 = d1;
+	Date d2(d1);	// d2是d1的构造
+	Date d2 = d1; // d2是d1的赋值
 
 	int i = 10;
 	int j(i);
@@ -273,3 +273,54 @@ int main()
 
 	return 0;
 }
+
+
+class Date
+{
+public:
+	void Display()
+	{
+		cout << "Display ()" << endl;
+		cout << "year:" << _year << endl;
+		cout << "month:" << _month << endl;
+		cout << "day:" << _day << endl << endl;
+	}
+
+	void Display() const
+	{
+		cout << "Display () const" << endl;
+		cout << "year:" << _year << endl;
+		cout << "month:" << _month << endl;
+		cout << "day:" << _day << endl << endl;
+	}
+private:
+	int _year; // 年
+	int _month; // 月
+	int _day; // 日
+};
+
+void Test()
+{
+	Date d1;
+	d1.Display();
+	const Date d2;
+	d2.Display();
+}
+#endif
+
+class Date
+{
+public:
+	Date* operator&()
+	{
+		return this;
+	}
+	const Date* operator&()const
+	{
+		return this;
+	}
+private:
+	int _year; // 年
+	int _month; // 月
+	int _day; // 日
+};
