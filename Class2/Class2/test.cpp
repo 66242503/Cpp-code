@@ -121,7 +121,7 @@ void TestDate()
 	Date d1(2020);	// 直接调用构造函数
 	d1 = 2020;	// 类型转换(先创建临时对象，临时对象再去初始化拷贝构造)
 }
-#endif
+
 
 
 class A
@@ -153,5 +153,42 @@ int main()
 	A a3(a2);
 	f(a1);
 	cout << A::GETN << endl;
+	return 0;
+}
+#endif
+
+class Date
+{
+	friend ostream& operator<<(ostream& _cout, const Date& d);
+	friend istream& operator>>(istream& _cin, Date& d);
+public:
+	Date(int year, int month, int day)
+		:_year(year)
+		, _month(month)
+		, _day(day)
+	{}
+private:
+	int _year;
+	int _month;
+	int _day;
+};
+
+ostream& operator<<(ostream& _cout, const Date& d)
+{
+	_cout << d._year << "-" << d._month << "-" << d._day;
+	return _cout;
+}
+istream& operator>>(istream& _cin, Date& d)
+{
+	_cin >> d._year;
+	_cin >> d._month;
+	_cin >> d._day;
+	return _cin;
+}
+int main()
+{
+	Date d;
+	cin >> d;
+	cout << d << endl;
 	return 0;
 }
