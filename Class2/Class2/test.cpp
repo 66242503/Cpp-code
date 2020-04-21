@@ -187,6 +187,7 @@ istream& operator>>(istream& _cin, Date& d)
 }
 int main()
 {
+	// 构造日期类
 	Date d;
 	cin >> d;
 	cout << d << endl;
