@@ -185,7 +185,6 @@ istream& operator>>(istream& _cin, Date& d)
 }
 int main()
 {
-	// 构造日期类
 	Date d(2020, 4, 20);
 	cin >> d;
 	cout << d << endl;
@@ -242,8 +241,8 @@ public:
 	public:
 		void foo(const A& a)
 		{
-			cout << k << endl;//OK
-			cout << a.h << endl;//OK
+			cout << k << endl;
+			cout << a.h << endl;
 		}
 	};
 };
@@ -252,6 +251,7 @@ int main()
 {
 	A::B b;
 	b.foo(A());
+	Date();	// 匿名对象
 	cout << sizeof(A) << endl;
 	return 0;
 }
