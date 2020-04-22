@@ -155,14 +155,14 @@ int main()
 	cout << A::GETN << endl;
 	return 0;
 }
-#endif
+
 
 class Date
 {
 	friend ostream& operator<<(ostream& _cout, const Date& d);
 	friend istream& operator>>(istream& _cin, Date& d);
 public:
-	Date(int year, int month, int day)
+	Date(int year = 0, int month = 1, int day = 1)
 		:_year(year)
 		, _month(month)
 		, _day(day)
@@ -180,16 +180,78 @@ ostream& operator<<(ostream& _cout, const Date& d)
 }
 istream& operator>>(istream& _cin, Date& d)
 {
-	_cin >> d._year;
-	_cin >> d._month;
-	_cin >> d._day;
+	_cin >> d._year >> d._month >> d._day;
 	return _cin;
 }
 int main()
 {
 	// 构造日期类
-	Date d;
+	Date d(2020, 4, 20);
 	cin >> d;
 	cout << d << endl;
+	return 0;
+}
+
+#endif
+
+class Time
+{
+	friend class Date; // 声明日期类为时间类的友元类，则在日期类中就直接访问Time类中的私有成员
+public:
+	Time(int hour = 0, int minute = 0, int second = 0)
+		: _hour(hour)
+		, _minute(minute)
+		, _second(second)
+	{}
+private:
+	int _hour;
+	int _minute;
+	int _second;
+};
+class Date
+{
+public:
+	Date(int year = 1900, int month = 1, int day = 1)
+		: _year(year)
+		, _month(month)
+		, _day(day)
+	{}
+	void SetTimeOfDate(int hour, int minute, int second)
+	{
+		// 直接访问时间类私有的成员变量
+		_t._hour = hour;
+		_t._minute = minute;
+		_t._second = second;
+	}
+private:
+	int _year;
+	int _month;
+	int _day;
+	Time _t;
+};
+
+
+class A
+{
+private:
+	static int k;
+	int h;
+public:
+	class B
+	{
+	public:
+		void foo(const A& a)
+		{
+			cout << k << endl;//OK
+			cout << a.h << endl;//OK
+		}
+	};
+};
+int A::k = 1;
+int main()
+{
+	A::B b;
+	b.foo(A());
+	cout << sizeof(A) << endl;
 	return 0;
 }
