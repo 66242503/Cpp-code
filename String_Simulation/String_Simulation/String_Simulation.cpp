@@ -12,11 +12,3 @@ public:
 private:
 
 };
-
-string::string()
-{
-}
-
-string::~string()
-{
-}
