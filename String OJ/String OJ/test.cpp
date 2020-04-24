@@ -1,7 +1,7 @@
-/*
+ï»¿/*
 1.
-ÕÒ³ö×Ö·û´®ÖĞµÚÒ»¸öÖ»³öÏÖÒ»´ÎµÄ×Ö·û
-Á´½Ó£ºhttps://www.nowcoder.com/practice/e896d0f82f1246a3aa7b232ce38029d4?tpId=37&&tqId=21282&rp=1&ru=/activity/oj&qru=/ta/huawei/question-ranking
+æ‰¾å‡ºå­—ç¬¦ä¸²ä¸­ç¬¬ä¸€ä¸ªåªå‡ºç°ä¸€æ¬¡çš„å­—ç¬¦
+é“¾æ¥ï¼šhttps://www.nowcoder.com/practice/e896d0f82f1246a3aa7b232ce38029d4?tpId=37&&tqId=21282&rp=1&ru=/activity/oj&qru=/ta/huawei/question-ranking
 */
 
 #include <iostream>
@@ -29,15 +29,15 @@ int main()
 
 /*
 2.
-¸ø¶¨Ò»¸ö×Ö·û´®£¬ÕÒµ½ËüµÄµÚÒ»¸ö²»ÖØ¸´µÄ×Ö·û£¬²¢·µ»ØËüµÄË÷Òı¡£Èç¹û²»´æÔÚ£¬Ôò·µ»Ø -1¡£
+ç»™å®šä¸€ä¸ªå­—ç¬¦ä¸²ï¼Œæ‰¾åˆ°å®ƒçš„ç¬¬ä¸€ä¸ªä¸é‡å¤çš„å­—ç¬¦ï¼Œå¹¶è¿”å›å®ƒçš„ç´¢å¼•ã€‚å¦‚æœä¸å­˜åœ¨ï¼Œåˆ™è¿”å› -1ã€‚
 https://leetcode-cn.com/problems/first-unique-character-in-a-string/
 */
 
 /*
-½â·¨Ò»£º
-Õı·´²éÑ¯£¬Èç¹ûÏÂ±êÏàÍ¬¾Í·µ»Ø
-ÓÅµã£º´úÂë¼ò½àÒ×¶®
-È±µã£ºÊ±¼ä¸´ÔÓ¶ÈÎªO(N^2)
+è§£æ³•ä¸€ï¼š
+æ­£åæŸ¥è¯¢ï¼Œå¦‚æœä¸‹æ ‡ç›¸åŒå°±è¿”å›
+ä¼˜ç‚¹ï¼šä»£ç ç®€æ´æ˜“æ‡‚
+ç¼ºç‚¹ï¼šæ—¶é—´å¤æ‚åº¦ä¸ºO(N^2)
 */
 class Solution {
 public:
@@ -52,17 +52,17 @@ public:
 };
 
 /*
-½â·¨¶ş£º
-¼ÆÊıÅÅĞòË¼Ïë,±éÀú×Ö·û´®Ö®ºóËã³öÃ¿¸ö×ÖÄ¸³öÏÖµÄ¸öÊı£¬×ÖÄ¸¸öÊıÊÇ1µÄ·µ»ØÏÂ±ê
-ÓÅµã£ºÊ±¼ä¸´ÔÓ¶ÈÎªO(N),Ğ§ÂÊ½Ï¸ß
-È±µã£º´úÂëÆ«¸´ÔÓ
+è§£æ³•äºŒï¼š
+è®¡æ•°æ’åºæ€æƒ³,éå†å­—ç¬¦ä¸²ä¹‹åç®—å‡ºæ¯ä¸ªå­—æ¯å‡ºç°çš„ä¸ªæ•°ï¼Œå­—æ¯ä¸ªæ•°æ˜¯1çš„è¿”å›ä¸‹æ ‡
+ä¼˜ç‚¹ï¼šæ—¶é—´å¤æ‚åº¦ä¸ºO(N),æ•ˆç‡è¾ƒé«˜
+ç¼ºç‚¹ï¼šä»£ç åå¤æ‚
 */
 class Solution {
 public:
 	int firstUniqChar(string s) 
 	{
-         // Ê±¼ä¸´ÔÓ¶ÈÎªO(N) ¿Õ¼ä¸´ÔÓ¶ÈÎªO(1)
-         // Í³¼Æ×Ö·û³öÏÖµÄ´ÎÊı
+         // æ—¶é—´å¤æ‚åº¦ä¸ºO(N) ç©ºé—´å¤æ‚åº¦ä¸ºO(1)
+         // ç»Ÿè®¡å­—ç¬¦å‡ºç°çš„æ¬¡æ•°
          int count[26] = {0};
          for(size_t i = 0; i < s.size(); i++)
              count[s[i] - 'a']++;
@@ -80,8 +80,8 @@ public:
 
 /*
 3.
-¸ø¶¨Ò»¸ö×Ö·û´®£¬ÑéÖ¤ËüÊÇ·ñÊÇ»ØÎÄ´®£¬Ö»¿¼ÂÇ×ÖÄ¸ºÍÊı×Ö×Ö·û£¬¿ÉÒÔºöÂÔ×ÖÄ¸µÄ´óĞ¡Ğ´¡£
-Á´½Ó£ºhttps://leetcode-cn.com/problems/valid-palindrome/
+ç»™å®šä¸€ä¸ªå­—ç¬¦ä¸²ï¼ŒéªŒè¯å®ƒæ˜¯å¦æ˜¯å›æ–‡ä¸²ï¼Œåªè€ƒè™‘å­—æ¯å’Œæ•°å­—å­—ç¬¦ï¼Œå¯ä»¥å¿½ç•¥å­—æ¯çš„å¤§å°å†™ã€‚
+é“¾æ¥ï¼šhttps://leetcode-cn.com/problems/valid-palindrome/
 */
 
 class Solution {
@@ -138,11 +138,11 @@ public:
 
 /*
 4.
-±àĞ´Ò»¸öº¯Êı£¬Æä×÷ÓÃÊÇ½«ÊäÈëµÄ×Ö·û´®·´×ª¹ıÀ´¡£ÊäÈë×Ö·û´®ÒÔ×Ö·ûÊı×é char[] µÄĞÎÊ½¸ø³ö¡£
+ç¼–å†™ä¸€ä¸ªå‡½æ•°ï¼Œå…¶ä½œç”¨æ˜¯å°†è¾“å…¥çš„å­—ç¬¦ä¸²åè½¬è¿‡æ¥ã€‚è¾“å…¥å­—ç¬¦ä¸²ä»¥å­—ç¬¦æ•°ç»„ char[] çš„å½¢å¼ç»™å‡ºã€‚
 https://leetcode-cn.com/problems/reverse-string/
 */
 
-// ½â·¨Ò»£ºÖ±½ÓÓÃreverseËã·¨ÄæÖÃ×Ö·û´®
+// è§£æ³•ä¸€ï¼šç›´æ¥ç”¨reverseç®—æ³•é€†ç½®å­—ç¬¦ä¸²
 class Solution {
 public:
 	void reverseString(vector<char>& s)
@@ -151,7 +151,7 @@ public:
 	}
 };
 
-// ½â·¨¶ş£ºÀûÓÃÊ×Î²½»»»Ô­Ôò£¬½«×Ö·û´®ÒÀ´Î½»»»
+// è§£æ³•äºŒï¼šåˆ©ç”¨é¦–å°¾äº¤æ¢åŸåˆ™ï¼Œå°†å­—ç¬¦ä¸²ä¾æ¬¡äº¤æ¢
 class Solution {
 public:
 	void reverseString(vector<char>& s)
@@ -167,8 +167,8 @@ public:
 
 /*
 5.
-½«Ò»¸ö×Ö·û´®×ª»»³ÉÒ»¸öÕûÊı£¬ÒªÇó²»ÄÜÊ¹ÓÃ×Ö·û´®×ª»»ÕûÊıµÄ¿âº¯Êı¡£ ÊıÖµÎª0»òÕß×Ö·û´®²»ÊÇÒ»¸öºÏ·¨µÄÊıÖµÔò·µ»Ø0
-Á´½Ó£ºhttps://www.nowcoder.com/practice/1277c681251b4372bdef344468e4f26e?tpId=13&&tqId=11202&rp=6&ru=/activity/oj&qru=/ta/coding-interviews/question-ranking
+å°†ä¸€ä¸ªå­—ç¬¦ä¸²è½¬æ¢æˆä¸€ä¸ªæ•´æ•°ï¼Œè¦æ±‚ä¸èƒ½ä½¿ç”¨å­—ç¬¦ä¸²è½¬æ¢æ•´æ•°çš„åº“å‡½æ•°ã€‚ æ•°å€¼ä¸º0æˆ–è€…å­—ç¬¦ä¸²ä¸æ˜¯ä¸€ä¸ªåˆæ³•çš„æ•°å€¼åˆ™è¿”å›0
+é“¾æ¥ï¼šhttps://www.nowcoder.com/practice/1277c681251b4372bdef344468e4f26e?tpId=13&&tqId=11202&rp=6&ru=/activity/oj&qru=/ta/coding-interviews/question-ranking
 */
 
 class Solution {
@@ -199,8 +199,8 @@ public:
 
 /*
 6.
-¸ø¶¨Á½¸ö×Ö·û´®ĞÎÊ½µÄ·Ç¸ºÕûÊı num1 ºÍnum2 £¬¼ÆËãËüÃÇµÄºÍ¡£
-Á´½Ó£ºhttps://leetcode-cn.com/problems/add-strings/
+ç»™å®šä¸¤ä¸ªå­—ç¬¦ä¸²å½¢å¼çš„éè´Ÿæ•´æ•° num1 å’Œnum2 ï¼Œè®¡ç®—å®ƒä»¬çš„å’Œã€‚
+é“¾æ¥ï¼šhttps://leetcode-cn.com/problems/add-strings/
 */
 
 class Solution {
@@ -247,8 +247,8 @@ public:
 
 /*
 7.
-¸ø¶¨Á½¸öÒÔ×Ö·û´®ĞÎÊ½±íÊ¾µÄ·Ç¸ºÕûÊı num1 ºÍ num2£¬·µ»Ø num1 ºÍ num2 µÄ³Ë»ı£¬ËüÃÇµÄ³Ë»ıÒ²±íÊ¾Îª×Ö·û´®ĞÎÊ½¡£
-Á´½Ó£ºhttps://leetcode-cn.com/problems/multiply-strings/description/
+ç»™å®šä¸¤ä¸ªä»¥å­—ç¬¦ä¸²å½¢å¼è¡¨ç¤ºçš„éè´Ÿæ•´æ•° num1 å’Œ num2ï¼Œè¿”å› num1 å’Œ num2 çš„ä¹˜ç§¯ï¼Œå®ƒä»¬çš„ä¹˜ç§¯ä¹Ÿè¡¨ç¤ºä¸ºå­—ç¬¦ä¸²å½¢å¼ã€‚
+é“¾æ¥ï¼šhttps://leetcode-cn.com/problems/multiply-strings/description/
 */
 
 class Solution {
@@ -272,5 +272,67 @@ public:
 				return ret.substr(i);
 		}
 		return "0";
+	}
+};
+
+
+
+/*
+8.
+ç»™å®šä¸€ä¸ªå­—ç¬¦ä¸²ï¼Œä½ éœ€è¦åè½¬å­—ç¬¦ä¸²ä¸­æ¯ä¸ªå•è¯çš„å­—ç¬¦é¡ºåºï¼ŒåŒæ—¶ä»ä¿ç•™ç©ºæ ¼å’Œå•è¯çš„åˆå§‹é¡ºåºã€‚
+
+ç¤ºä¾‹:
+è¾“å…¥: "Let's take LeetCode contest"
+è¾“å‡º: "s'teL ekat edoCteeL tsetnoc"Â 
+
+é“¾æ¥ï¼šhttps://leetcode-cn.com/problems/reverse-words-in-a-string-iii
+*/
+
+class Solution {
+public:
+	string reverseWords(string s) {
+		auto prev = s.begin();
+		auto cur = prev;
+		while (cur < s.end())
+		{
+			if (*cur == ' ')
+			{
+				reverse(prev, cur);
+				prev = cur + 1;
+			}
+			cur++;
+		}
+		reverse(prev, cur);
+		return s;
+	}
+};
+
+
+
+/*
+9.
+ç»™å®šä¸€ä¸ªå­—ç¬¦ä¸²å’Œä¸€ä¸ªæ•´æ•° kï¼Œä½ éœ€è¦å¯¹ä»å­—ç¬¦ä¸²å¼€å¤´ç®—èµ·çš„æ¯ä¸ª 2k ä¸ªå­—ç¬¦çš„å‰kä¸ªå­—ç¬¦è¿›è¡Œåè½¬ã€‚
+å¦‚æœå‰©ä½™å°‘äº k ä¸ªå­—ç¬¦ï¼Œåˆ™å°†å‰©ä½™çš„æ‰€æœ‰å…¨éƒ¨åè½¬ã€‚å¦‚æœæœ‰å°äº 2k ä½†å¤§äºæˆ–ç­‰äº k ä¸ªå­—ç¬¦ï¼Œåˆ™åè½¬å‰ k ä¸ªå­—ç¬¦ï¼Œå¹¶å°†å‰©ä½™çš„å­—ç¬¦ä¿æŒåŸæ ·ã€‚
+ç¤ºä¾‹:
+è¾“å…¥: s = "abcdefg", k = 2
+è¾“å‡º: "bacdfeg"
+è¦æ±‚:
+è¯¥å­—ç¬¦ä¸²åªåŒ…å«å°å†™çš„è‹±æ–‡å­—æ¯ã€‚
+ç»™å®šå­—ç¬¦ä¸²çš„é•¿åº¦å’Œ k åœ¨[1, 10000]èŒƒå›´å†…ã€‚
+é“¾æ¥ï¼šhttps://leetcode-cn.com/problems/reverse-string-ii
+*/
+
+class Solution {
+public:
+	string reverseStr(string s, int k)
+	{
+		for (auto it = s.begin(); it < s.end(); it += 2 * k)
+		{
+			if (it + k < s.end())
+				reverse(it, it + k);
+			else
+				reverse(it, s.end());
+		}
+		return s;
 	}
 };
