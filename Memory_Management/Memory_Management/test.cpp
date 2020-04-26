@@ -101,7 +101,29 @@ void test6()
 	ListNode* cur_c = BuyListNode(1);
 
 	ListNode* cur_cpp = new ListNode(1);
+}
 
+class B
+{
+public:
+	B(int a = 0)
+		: _d(a)
+	{
+		cout << "B():" << this << endl;
+	}
+	~B()
+	{
+		cout << "~B():" << this << endl;
+	}
+private:
+	int _d;
+};
+
+void test7()
+{
+	// pt现在指向的只不过是与A对象相同大小的一段空间，还不能算是一个对象，因为构造函数没有执行
+	B* p = (B*)malloc(sizeof(B));
+	new(p)B; // 注意：如果Test类的构造函数有参数时，此处需要传参
 }
 
 int main()
@@ -113,4 +135,3 @@ int main()
 	A* p2 = (A*)operator new(sizeof(A));
 	return 0;
 }
-
