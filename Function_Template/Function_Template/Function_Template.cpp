@@ -79,7 +79,7 @@ int main()
 	return 0;
 }
 
-#endif
+
 
 // 专门处理int的加法函数
 int Add(int left, int right)
@@ -96,4 +96,75 @@ void Test()
 {
 	Add(1, 2); // 与非模板函数匹配，编译器不需要特化
 	Add<int>(1, 2); // 调用编译器特化的Add版本
+}
+
+
+// 专门处理int的加法函数
+int Add(int left, int right)
+{
+	return left + right;
+}
+// 通用加法函数
+template<class T1, class T2>
+T1 Add(T1 left, T2 right)
+{
+	return left + right;
+}
+void Test()
+{
+	Add(1, 2); // 与非函数模板类型完全匹配，不需要函数模板实例化
+	Add(1, 2.0); // 模板函数可以生成更加匹配的版本，编译器根据实参生成更加匹配的Add函数
+}
+#endif
+
+namespace N
+{
+	// typedef int 
+	template <class T>
+	class seqlist
+	{
+	public:
+		seqlist(size_t n = 10)
+			:_a(new T[n])
+			, _size(0)
+			, _capacity(n)
+		{}
+
+		~seqlist();
+		{
+			if (_a != nullptr)
+			{
+				delete[] _a;
+				_size = 0;
+				_capacity = 0;
+			}
+		}
+
+		void PushBack(T x)
+		{
+			// 尾插操作
+		}
+
+	private:
+		T*	   _a;
+		size_t _size;
+		size_t _capacity;
+	};
+}
+
+int main()
+{
+	N::seqlist<int> seqcpp1;
+	seqcpp1.PushBack(1);
+	seqcpp2.PushBack(2);
+	seqcpp3.PushBack(3);
+
+	N::seqlist<int> seqcpp2;
+	seqcpp2.PushBack(1);
+	seqcpp2.PushBack(2);
+	seqcpp2.PushBack(3);
+
+
+	
+	return 0;
 }
