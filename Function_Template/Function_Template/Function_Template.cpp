@@ -1,5 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS 1
 #include <iostream>
+#include <assert.h>
 
 using namespace std;
 
@@ -130,7 +131,7 @@ namespace N
 			, _capacity(n)
 		{}
 
-		~seqlist();
+		~seqlist()
 		{
 			if (_a != nullptr)
 			{
@@ -145,6 +146,12 @@ namespace N
 			// 尾插操作
 		}
 
+		T& operator[](size_t i)
+		{
+			assert(i < _size);
+			return _a[i];
+		}
+
 	private:
 		T*	   _a;
 		size_t _size;
@@ -156,15 +163,15 @@ int main()
 {
 	N::seqlist<int> seqcpp1;
 	seqcpp1.PushBack(1);
-	seqcpp2.PushBack(2);
-	seqcpp3.PushBack(3);
+	seqcpp1.PushBack(2);
+	seqcpp1.PushBack(3);
+	cout << seqcpp1[0] << endl; // 读第i个数据的值
 
-	N::seqlist<int> seqcpp2;
+	seqcpp1[0] = 0; // 修改第i个数据的值 
+
+	N::seqlist<double> seqcpp2;
 	seqcpp2.PushBack(1);
 	seqcpp2.PushBack(2);
 	seqcpp2.PushBack(3);
-
-
-	
 	return 0;
 }
