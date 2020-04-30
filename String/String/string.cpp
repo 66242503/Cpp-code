@@ -1,7 +1,28 @@
 #define _CRT_SECURE_NO_WARNINGS 1
 #include <iostream>
+#include <string>
 
 using namespace std;
+
+int main()
+{
+	string s1;
+	string s2("helloworld");
+	string s3(s2);
+	string s4(s3, 5, 5);
+	string s5(5, 'a');
+
+	cout << s1 << endl;
+	cout << s2 << endl;
+	cout << s3 << endl;
+	cout << s4 << endl;
+	cout << s5 << endl;
+
+	for (string::iterator it = s2.begin(); it != s2.end(); it++)
+	{
+		cout << *it << " ";
+	}
+}
 
 namespace N
 {
@@ -71,25 +92,25 @@ namespace N
 	}
 }
 
-int main()
-{
-	N::string s1("world");
-	N::string s2("hello");
-	s2[0] = 'x';
-
-	cout << sizeof(s1) << endl;
-	cout << sizeof(s2) << endl;
-
-	N::string copy(s2);
-	cout << s1 << endl;
-	cout << s2 << endl;
-	cout << copy << endl;
-
-	copy = s1;
-	s1 = s1;
-	cout << s1 << endl;
-	cout << s2 << endl;
-	cout << copy << endl;
-
-	return 0;
-}
+//int main()
+//{
+//	N::string s1("world");
+//	N::string s2("hello");
+//	s2[0] = 'x';
+//
+//	cout << sizeof(s1) << endl;
+//	cout << sizeof(s2) << endl;
+//
+//	N::string copy(s2);
+//	cout << s1 << endl;
+//	cout << s2 << endl;
+//	cout << copy << endl;
+//
+//	copy = s1;
+//	s1 = s1;
+//	cout << s1 << endl;
+//	cout << s2 << endl;
+//	cout << copy << endl;
+//
+//	return 0;
+//}
