@@ -20,8 +20,25 @@ int main()
 
 	for (string::iterator it = s2.begin(); it != s2.end(); it++)
 	{
-		cout << *it << " ";
+		cout << *it << " " ;
 	}
+	cout << endl;
+
+	for (size_t i = 0; i < s2.size(); i++)
+	{
+		cout << s2[i];
+
+		if (i == s2.size() - 1)
+			cout << endl;
+		else
+			cout << " ";
+	}
+
+	for (auto e : s2)
+	{
+		cout << e << " ";
+	}
+	cout << endl;
 }
 
 namespace N
