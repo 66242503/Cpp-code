@@ -6,8 +6,14 @@ using namespace std;
 class string
 {
 public:
-	string();
-	~string();
+	string()
+	{
+
+	}
+	~string()
+	{
+
+	}
 
 private:
 
