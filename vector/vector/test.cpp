@@ -54,5 +54,5 @@ void test_vector3()
 
 int main()
 {
-	test_vector2();
+	test_vector1();
 }
