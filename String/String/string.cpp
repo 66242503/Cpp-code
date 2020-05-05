@@ -3,7 +3,7 @@
 #include <string>
 
 using namespace std;
-
+#if 0
 int main()
 {
 	string s1;
@@ -40,7 +40,7 @@ int main()
 	}
 	cout << endl;
 }
-
+#endif
 namespace N
 {
 	// 实现一个简单的string类
@@ -109,25 +109,25 @@ namespace N
 	}
 }
 
-//int main()
-//{
-//	N::string s1("world");
-//	N::string s2("hello");
-//	s2[0] = 'x';
-//
-//	cout << sizeof(s1) << endl;
-//	cout << sizeof(s2) << endl;
-//
-//	N::string copy(s2);
-//	cout << s1 << endl;
-//	cout << s2 << endl;
-//	cout << copy << endl;
-//
-//	copy = s1;
-//	s1 = s1;
-//	cout << s1 << endl;
-//	cout << s2 << endl;
-//	cout << copy << endl;
-//
-//	return 0;
-//}
+int main()
+{
+	N::string s1("world");
+	N::string s2("hello");
+	s2[0] = 'x';
+
+	cout << sizeof(s1) << endl;
+	cout << sizeof(s2) << endl;
+
+	N::string copy(s2);
+	cout << s1 << endl;
+	cout << s2 << endl;
+	cout << copy << endl;
+
+	copy = s1;
+	s1 = s1;
+	cout << s1 << endl;
+	cout << s2 << endl;
+	cout << copy << endl;
+
+	return 0;
+}
