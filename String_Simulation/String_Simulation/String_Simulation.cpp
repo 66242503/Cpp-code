@@ -8,11 +8,14 @@ class string
 public:
 	string()
 	{
-		//
+		// 
+
 	}
+
 	~string()
 	{
-		//
+		// 
+
 	}
 
 private:
