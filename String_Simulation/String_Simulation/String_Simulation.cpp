@@ -17,7 +17,24 @@ public:
 		// 
 
 	}
-
 private:
 
 };
+int i = 0;
+//static void Long()
+//{
+//	cout << ++i << endl;
+//}
+
+void Long()
+{
+	cout << ++i << endl;
+}
+
+int main()
+{
+
+	Long();
+	Long();
+	return 0;
+}
