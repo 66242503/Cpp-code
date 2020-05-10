@@ -21,10 +21,6 @@ private:
 
 };
 int i = 0;
-//static void Long()
-//{
-//	cout << ++i << endl;
-//}
 
 void Long()
 {
