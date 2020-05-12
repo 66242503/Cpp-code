@@ -3,8 +3,7 @@
 #include <string>
 
 using namespace std;
-#if 0
-int main()
+void Test1()
 {
 	string s1;
 	string s2("helloworld");
@@ -40,7 +39,49 @@ int main()
 	}
 	cout << endl;
 }
-#endif
+
+void Test2()
+{
+	string s1;
+	string s2("helloworld");
+	cout << s1.size() << endl;
+	cout << s2.size() << endl;
+	
+	cout << s1.length() << endl;
+	cout << s2.length() << endl;	
+	
+	cout << s1.capacity() << endl;
+	cout << s2.capacity() << endl;
+
+	cout << s1.empty() << endl;
+	cout << s2.empty() << endl;
+
+	s2.clear();
+	cout << s2.size() << endl;
+}
+
+void Test3()
+{
+	string s;
+	size_t sz = s.capacity();
+	cout << "making s grow:\n";
+	for (int i = 0; i < 1000; ++i)
+	{
+		s.push_back('c');
+		if (sz != s.capacity())
+		{
+			sz = s.capacity();
+			cout << "capacity changed: " << sz << '\n';
+		}
+	}
+}
+
+int main()
+{
+	Test3();
+	return 0;
+}
+
 namespace N
 {
 	// 实现一个简单的string类
@@ -109,25 +150,24 @@ namespace N
 	}
 }
 
-int main()
-{
-	N::string s1("world");
-	N::string s2("hello");
-	s2[0] = 'x';
-
-	cout << sizeof(s1) << endl;
-	cout << sizeof(s2) << endl;
-
-	N::string copy(s2);
-	cout << s1 << endl;
-	cout << s2 << endl;
-	cout << copy << endl;
-
-	copy = s1;
-	s1 = s1;
-	cout << s1 << endl;
-	cout << s2 << endl;
-	cout << copy << endl;
-
-	return 0;
-}
+//int main()
+//{
+//	N::string s1("world");
+//	N::string s2("hello");
+//	s2[0] = 'x';
+//	cout << sizeof(s1) << endl;
+//	cout << sizeof(s2) << endl;
+//
+//	N::string copy(s2);
+//	cout << s1 << endl;
+//	cout << s2 << endl;
+//	cout << copy << endl;
+//
+//	copy = s1;
+//	s1 = s1;
+//	cout << s1 << endl;
+//	cout << s2 << endl;
+//	cout << copy << endl;
+//
+//	return 0;
+//}
