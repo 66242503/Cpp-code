@@ -60,6 +60,8 @@ void Test2()
 	cout << s2.size() << endl;
 }
 
+
+
 void Test3()
 {
 	string s;
@@ -148,7 +150,6 @@ namespace N
 		{
 			out << s[i];
 		}
-
 		return out;
 	}
 }
