@@ -43,7 +43,7 @@ void Test1()
 void Test2()
 {
 	string s1;
-	string s2("helloworld");
+	string s2("hello  world");
 	cout << s1.size() << endl;
 	cout << s2.size() << endl;
 	
@@ -59,7 +59,7 @@ void Test2()
 	s2.clear();
 	cout << s2.size() << endl;
 }
-
+ 
 
 
 void Test3()
