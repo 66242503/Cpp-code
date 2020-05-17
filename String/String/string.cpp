@@ -3,10 +3,12 @@
 #include <string>
 
 using namespace std;
+
+
 void Test1()
 {
 	string s1;
-	string s2("helloworld");
+	string s2("hello world");
 	string s3(s2);
 	string s4(s3, 5, 5);
 	string s5(5, 'a');
@@ -40,6 +42,7 @@ void Test1()
 	cout << endl;
 }
 
+
 void Test2()
 {
 	string s1;
@@ -60,7 +63,6 @@ void Test2()
 	cout << s2.size() << endl;
 }
  
-
 
 void Test3()
 {
@@ -83,10 +85,10 @@ void Test3()
 
 int main()
 {
-	Test3();
+	Test1();
 	return 0;
 }
-
+#if 0
 namespace N
 {
 	// 实现一个简单的string类
@@ -175,3 +177,4 @@ namespace N
 //
 //	return 0;
 //}
+#endif
