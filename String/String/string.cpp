@@ -69,7 +69,7 @@ void Test3()
 	string s;
 	size_t sz = s.capacity();
 	cout << "making s grow:\n";
-	// s.reserve(1000);
+	// s.reserve(1000,'0');
 	s.resize(1000);
 	for (int i = 0; i < 1000; ++i)
 	{
