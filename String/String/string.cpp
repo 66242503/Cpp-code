@@ -83,11 +83,13 @@ void Test3()
 	}
 }
 
+
 int main()
 {
-	Test1();
+	Test3();
 	return 0;
 }
+
 #if 0
 namespace N
 {
