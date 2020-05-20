@@ -81,14 +81,91 @@ void Test3()
 			cout << "capacity changed: " << sz << '\n';
 		}
 	}
+}	// 容量的使用
+
+
+void Test4()
+{
+	string s("12345");
+	int value = 0;
+
+	for (size_t i = 0; i < s.size(); ++i)
+	{
+		value *= 10;
+		value += (s[i] - '0');
+	}
+	cout << value << endl;
+
+	// 迭代器
+	value = 0;
+	string::iterator it = s.begin();
+	while (it != s.end())
+	{
+		value *= 10;
+		value += (*it - '0');
+		++it;
+	}
+	cout << value << endl;
+
+	// 范围for
+	value = 0;
+	for (auto &e : s)
+	{
+		value *= 10;
+		value += (e - '0');
+	}
+	cout << value << endl;
+
+	// 反向迭代器
+	value = 0;
+	string::reverse_iterator rit = s.rbegin();
+	while (rit != s.rend())
+	{
+		value *= 10;
+		value += (*rit - '0');
+		++rit;
+	}
+	cout << value << endl;
+}	// 遍历
+
+
+void Test5()
+{
+	string s("hello world");
+	s[0] = 'x'; // s.opeator[](0)
+	s.push_back('!');
+	s.append("hello");
+	cout << s << endl;
+
+	// +=
+	string str1("hello");
+	string str2("world");
+	str1 += ' ';
+	str1 += str2;
+	cout << str1 << endl;
+}	// 字符串的修改，尾插
+
+void Func(const string& s)
+{
+	// 迭代器
+	int value = 0;
+	string::const_iterator it = s.begin();
+	while (it != s.end())
+	{
+		value *= 10;
+		value += (*it - '0');
+		++it;
+	}
+	cout << value << endl;
 }
 
 
 int main()
 {
-	Test3();
+	Test5();
 	return 0;
 }
+
 
 #if 0
 namespace N
