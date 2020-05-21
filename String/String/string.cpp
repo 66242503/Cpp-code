@@ -145,6 +145,29 @@ void Test5()
 	cout << str1 << endl;
 }	// 字符串的修改，尾插
 
+
+void Test6()
+{
+	// 要求取出后缀
+	string file1("string.cpp.zip");
+	string file2("string.txt.c.doc");
+	size_t posl = file1.rfind('.');
+	size_t pos2 = file2.rfind('.');
+	cout << file1.substr(posl) << endl;
+	cout << file2.substr(pos2) << endl;
+
+	string url("http://www.cplusplus.com/reference/algorithm/find/?kw=find");
+	// 取出url中的域名
+
+	size_t urlfirst = url.find("://");
+	urlfirst += 3;
+
+	size_t urlend = url.find('/',urlfirst);
+	size_t tmp = urlend - urlfirst;
+	cout << url.substr(urlfirst, tmp);
+}
+
+
 void Func(const string& s)
 {
 	// 迭代器
@@ -156,13 +179,14 @@ void Func(const string& s)
 		value += (*it - '0');
 		++it;
 	}
+
 	cout << value << endl;
 }
 
 
 int main()
 {
-	Test5();
+	Test6();
 	return 0;
 }
 
