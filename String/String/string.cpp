@@ -168,9 +168,15 @@ void Test6()
 }
 
 
+void Test6()
+{
+	// 插入、删除操作
+}
+
+
 void Func(const string& s)
 {
-	// 迭代器
+	// const迭代器
 	int value = 0;
 	string::const_iterator it = s.begin();
 	while (it != s.end())
