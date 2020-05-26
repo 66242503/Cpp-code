@@ -4,6 +4,7 @@
 
 using namespace std;
 
+
 void Test1()
 {
 	string s1;
@@ -142,7 +143,7 @@ void Test5()
 	str1 += ' ';
 	str1 += str2;
 	cout << str1 << endl;
-}	// ×Ö·û´®µÄĞŞ¸Ä£¬Î²²å(operator)
+}	// ×Ö·û´®µÄĞŞ¸Ä£¬Î²²å
 
 
 void Test6()
@@ -167,16 +168,9 @@ void Test6()
 }
 
 
-void Test7()
+void Test6()
 {
-	string s("hello world");
-	s.insert(5,"x");
-	cout << s << endl;
-
-	s.erase();
-	cout << s << endl;
 	// ²åÈë¡¢É¾³ı²Ù×÷
-
 }
 
 
@@ -198,6 +192,6 @@ void Func(const string& s)
 
 int main()
 {
-	Test7();
+	Test6();
 	return 0;
 }
