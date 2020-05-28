@@ -168,9 +168,14 @@ void Test6()
 }
 
 
-void Test6()
+void Test7()
 {
 	// ²åÈë¡¢É¾³ı²Ù×÷
+	string s("hello world");
+	s.insert(5, " the");
+	cout << s << endl;
+	s.erase(5);
+	cout << s << endl;
 }
 
 
@@ -192,6 +197,6 @@ void Func(const string& s)
 
 int main()
 {
-	Test6();
+	Test7();
 	return 0;
 }
