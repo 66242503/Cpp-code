@@ -101,30 +101,29 @@ int main()
 	return 0;
 }
 
-#endif
 
-// 写一段代码验证虚表是存在哪的？
-//int main()
-//{
-//	int i = 0;
-//	printf("栈变量地址：%p\n", &i);
-//
-//	int* p1 = new int;
-//	printf("堆变量地址：%p\n", p1);
-//
-//	static int j = 0;
-//	printf("数据段变量地址：%p\n", &j);
-//
-//	char* p2 = "hello world";
-//	printf("代码段(常量区)变量地址：%p\n", p2);
-//
-//	Base1 b1;
-//	Base2 b2;
-//	printf("Base1虚表地址：%p\n", *((int*)&b1));
-//	printf("Base2虚表地址：%p\n", *((int*)&b2));
-//
-//	return 0;
-//}
+int main()
+{
+	int i = 0;
+	printf("栈变量地址：%p\n", &i);
+
+	int* p1 = new int;
+	printf("堆变量地址：%p\n", p1);
+
+	static int j = 0;
+	printf("数据段变量地址：%p\n", &j);
+
+	char* p2 = "hello world";
+	printf("代码段(常量区)变量地址：%p\n", p2);
+
+	Base1 b1;
+	Base2 b2;
+	printf("Base1虚表地址：%p\n", *((int*)&b1));
+	printf("Base2虚表地址：%p\n", *((int*)&b2));
+
+	return 0;
+}
+#endif
 
 #include<iostream>
 using namespace std;
@@ -254,7 +253,6 @@ int main()
 
 	f3(aa);
 	f3(bb);
-
 
 	return 0;
 }
