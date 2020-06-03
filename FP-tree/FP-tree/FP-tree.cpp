@@ -1,3 +1,4 @@
+/*FP-tree算法*/
 #include <iostream>
 #include <string>
 #include <algorithm>
@@ -6,7 +7,7 @@
 #include <fstream>
 #include <sstream>
 
-#define suport 0.001	//最小支持度
+#define minsuport 0.001	//最小支持度
 using namespace std;
 
 struct FPtreeNode
@@ -72,9 +73,11 @@ vector<string> Getfile()
 	if (!ifile){
 		cout << "open file error" << endl;
 	}
-	else{
+	else
+	{
 		string temp;
-		while (getline(ifile, temp)){
+		while (getline(ifile, temp))
+		{
 			line++;
 			file.insert(file.end(), temp);
 		}
@@ -86,7 +89,7 @@ vector<string> Getfile()
 
 bool cmp(listNode &a, listNode &b)
 {
-	return a.count>b.count;
+	return a.count > b.count;
 }
 
 
@@ -96,7 +99,7 @@ vector<listNode> Getheadlist(vector<string> &file)
 	map<string, int> r1;
 	string temp;
 	string lk;
-	for (size_t f = 0; f<file.size(); f++)
+	for (size_t f = 0; f < file.size(); f++)
 	{
 		//第一次扫描数据库
 		temp = file[f];
@@ -120,12 +123,12 @@ vector<listNode> Getheadlist(vector<string> &file)
 	map<string, int>::iterator it;
 	for (it = r1.begin(); it != r1.end(); it++)
 	{
-		//待删除
-		if (it->second >= ceil(suport*line))
+		// 待删除
+		if (it->second >= ceil(minsuport*line))
 		{
 			string s = it->first;
 			int x = atoi(s.c_str());
-			//转换成整数
+			// 转换成整数
 			listNode xx;
 			xx.data = x;
 			xx.count = it->second;
@@ -239,7 +242,7 @@ FPtreeNode*  Buildtree(vector<vector<int> > &rfile, vector<listNode> &L1)
 			flag = 0;
 			if (i == 0)
 			{
-				//第一条
+				// 第一条
 				FPtreeNode *newNode = new FPtreeNode;
 				c++;
 				newNode->count = 1;
@@ -266,7 +269,7 @@ FPtreeNode*  Buildtree(vector<vector<int> > &rfile, vector<listNode> &L1)
 					if (p->data == rfile[i][j])
 					{
 						p->count++;
-						q = p;	//q->chilren=p;
+						q = p;	//q->children=p;
 						p = p->children;
 						j++;
 						flag = 1;
@@ -278,7 +281,6 @@ FPtreeNode*  Buildtree(vector<vector<int> > &rfile, vector<listNode> &L1)
 						p = p->brother;
 						flag = 2;
 					}
-
 				}
 
 				if (flag == 1)
@@ -408,7 +410,8 @@ void Getresult(vector<listNode> &headlist, FPtreeNode* &head, string &base, vect
 }
 
 
-void Print(){
+void Print()
+{
 	for (auto p = result.cbegin(); p != result.cend(); p++)
 	{
 		cout << p->data << " " << "(" << p->count << ")" << endl;
@@ -416,7 +419,8 @@ void Print(){
 }
 
 
-int main(){
+int main()
+{
 	vector<string> file = Getfile();
 	vector<listNode> headlist = Getheadlist(file);
 	vector<vector<int> >rfile = Get_FPfile(file, headlist);
