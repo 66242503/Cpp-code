@@ -69,7 +69,7 @@ int line = 0;
 vector<string> Getfile()
 {
 	vector<string> file;
-	ifstream ifile("D://retail.txt");
+	ifstream ifile("D://in.txt");
 	if (!ifile){
 		cout << "open file error" << endl;
 	}
@@ -251,7 +251,7 @@ FPtreeNode*  Buildtree(vector<vector<int> > &rfile, vector<listNode> &L1)
 				p->children = newNode;
 				p = p->children;
 				j++;
-				for (size_t m = 0; m<L1.size(); m++)
+				for (size_t m = 0; m < L1.size(); m++)
 				{
 					if (L1[m].data == newNode->data)
 					{
@@ -397,6 +397,7 @@ void Getresult(vector<listNode> &headlist, FPtreeNode* &head, string &base, vect
 		temp.count = p->count;
 		result.push_back(temp);
 		/*****递归******/
+
 		//产生条件模式基
 		vector<string> file1 = GetFrequentItems(*p, head);
 		vector<listNode>headlist1 = Getheadlist(file1);	//getL1
