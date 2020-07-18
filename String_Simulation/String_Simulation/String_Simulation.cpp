@@ -295,7 +295,7 @@ namespace N
 				reserve(newcapacity);
 			}
 			int end = _size;
-			while (end >= pos)
+			while (end >= (int)pos)
 			{
 				_str[end + 1] = _str[end];
 				--end;
@@ -313,7 +313,7 @@ namespace N
 				reserve(_size + len);
 
 			int end = len + _size;
-			while (end >= pos)
+			while (end >= (int)pos)
 			{
 				_str[end + len] = str[end];
 				--end;
