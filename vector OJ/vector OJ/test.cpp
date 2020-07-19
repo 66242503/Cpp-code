@@ -25,6 +25,29 @@ public:
 链接：https://leetcode-cn.com/problems/single-number-ii
 */
 
+class Solution {
+public:
+	int singleNumber(vector<int>& nums)
+	{
+		int bitarray[32] = { 0 };
+		for (auto & e : nums)
+		{
+			for (size_t i = 0; i < 32; i++)
+			{
+				if (e & (1 << i))
+					bitarray[i]++;
+			}
+		}
+
+		int val = 0;
+		for (size_t i = 0; i < 32; i++)
+		{
+			if (bitarray[i] % 3 == 1)
+				val |= (1 << i);
+		}
+		return val;
+	}
+};
 
 
 /*
@@ -34,7 +57,34 @@ public:
 链接：https://leetcode-cn.com/problems/single-number-iii
 */
 
+class Solution {
+public:
+	vector<int> singleNumber(vector<int>& nums) {
+		int value = 0;
+		for (auto &e : nums)
+			value ^= e;
 
+		size_t i = 0;
+		for (; i < 32; i++)
+		{
+			if (value & (1 << i))
+				break;
+		}
+
+		int num1 = 0, num2 = 0;
+		for (auto &e : nums)
+		{
+			if (e & (1 << i))
+				num1 ^= e;
+			else
+				num2 ^= e;
+		}
+		nums.clear();
+		nums.push_back(num1);
+		nums.push_back(num2);
+		return nums;
+	}
+};
 
 /*
 4.
@@ -53,15 +103,70 @@ public:
 链接：https://leetcode-cn.com/problems/pascals-triangle/description/
 */
 
+class Solution {
+public:
+	vector<vector<int>> generate(int numRows) {
+		vector<vector<int>> vv(numRows);
+		for (size_t i = 0; i < numRows; ++i)
+		{
+			vv[i].resize(i + 1);
+			vv[i][0] = 1;
+			vv[i][vv[i].size() - 1] = 1;
+		}
 
+		for (size_t i = 0; i < vv.size(); ++i)
+		{
+			for (size_t j = 0; j < vv[i].size(); j++)
+			{
+				if (vv[i][j] != 1)
+					vv[i][j] = vv[i - 1][j] + vv[i - 1][j - 1];
+			}
+		}
+		return vv;
+	}
+};
 
 /*
 5.
-给定一个排序数组，你需要在 原地 删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。
-不要使用额外的数组空间，你必须在 原地 修改输入数组 并在使用 O(1) 额外空间的条件下完成。
+给定一个排序数组，你需要在原地删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。
+不要使用额外的数组空间，你必须在原地修改输入数组 并在使用 O(1) 额外空间的条件下完成。
 链接：https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array
 */
 
+int removeDuplicates(int* nums, int numsSize)
+{
+	int src1 = 0, src2 = 1;
+	int dst = 0;
+	while (src2 < numsSize)
+	{
+		nums[dst] = nums[src1];
+		++dst;
+
+		if (nums[src1] != nums[src2])
+		{
+			++src1;
+			++src2;
+		}
+
+		else
+		{
+			while (src2 < numsSize && nums[src1] == nums[src2])
+			{
+				++src2;
+			}
+
+			src1 = src2;
+			++src2;
+		}
+	}
+	if (src1 < numsSize)
+	{
+		nums[dst] = nums[src1];
+		++dst;
+	}
+	return dst;
+
+}
 
 
 /*
@@ -81,6 +186,49 @@ public:
 链接：https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number/
 */
 
+class Solution {
+
+public:
+
+	int MoreThanHalfNum_Solution(vector<int> numbers)
+	{
+		if (numbers.empty())
+			return 0;
+
+		// 遍历每个元素，并记录次数；若与前一个元素相同，则次数加1，否则次数减1
+		int result = numbers[0];
+		int times = 1; // 次数
+
+		for (int i = 1; i<numbers.size(); ++i)
+		{
+			if (times == 0)
+			{
+				// 更新result的值为当前元素，并置次数为1
+				result = numbers[i];
+				times = 1;
+			}
+
+			else if (numbers[i] == result)
+			{
+				++times; // 相同则加1
+			}
+
+			else
+			{
+				--times; // 不同则减1
+			}
+		}
+
+		// 判断result是否符合条件，即出现次数大于数组长度的一半
+		times = 0;
+		for (int i = 0; i<numbers.size(); ++i)
+		{
+			if (numbers[i] == result)
+				++times;
+		}
+		return (times > numbers.size() / 2) ? result : 0;
+	}
+};
 
 
 /*
@@ -92,3 +240,69 @@ HZ偶尔会拿些专业问题来忽悠那些非计算机专业的同学。今天
 给一个数组，返回它的最大连续子序列的和，你会不会被他忽悠住？(子向量的长度至少是1)
 链接：https://www.nowcoder.com/practice/459bd355da1549fa8a49e350bf3df484?tpId=13&tqId=11183&rp=1&ru=%2Factivity%2Foj&qru=%2Fta%2Fcoding-interviews%2Fquestion-ranking&tPage=2
 */
+
+class Solution {
+public:
+	int FindGreatestSumOfSubArray(vector<int> array)
+	{
+		int sz = array.size();
+		vector<int> dp(sz + 1, 0);
+		int ret = array[0];
+		for (int i = 1; i <= sz; ++i)
+		{
+			dp[i] = max(array[i - 1], dp[i - 1] + array[i - 1]);
+			ret = max(ret, dp[i]);
+		}
+		return ret;
+	}
+};
+
+
+/*
+9.
+给定一个仅包含数字 2-9 的字符串，返回所有它能表示的字母组合。
+给出数字到字母的映射如下（与电话按键相同）。注意 1 不对应任何字母。
+示例:
+输入："23"
+输出：["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"].
+链接：https://leetcode-cn.com/problems/letter-combinations-of-a-phone-number
+*/
+
+class Solution {
+public:
+
+	map<char, string> hash =
+	{
+		{ '2', "abc" }, { '3', "def" }, { '4', "ghi" }, { '5', "jkl" }, { '6', "mno" },
+		{ '7', "pqrs" }, { '8', "tuv" }, { '9', "wxyz" }
+	};
+
+	vector<string> ans;
+	string current;
+
+	void DFS(int index, string digits)
+	{
+		if (index == digits.size())
+		{
+			ans.push_back(current);
+			return;
+		}
+
+		for (int i = 0; i < hash[digits[index]].size(); i++)
+		{
+			current.push_back(hash[digits[index]][i]);
+			DFS(index + 1, digits);
+			current.pop_back();
+		}
+	}
+
+	vector<string> letterCombinations(string digits)
+	{
+		if (digits.size() == 0)
+		{
+			return ans;
+		}
+		DFS(0, digits);
+		return ans;
+	}
+};
