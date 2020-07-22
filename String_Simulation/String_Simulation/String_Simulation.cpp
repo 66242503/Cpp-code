@@ -359,7 +359,7 @@ namespace N
 		{
 			char ch;
 			ch = in.get();
-			if (ch == ' ' || ch == '\h')
+			if (ch == ' ' || ch == '\n')
 			{
 				break;
 			}
