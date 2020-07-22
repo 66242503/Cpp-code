@@ -152,9 +152,9 @@ namespace ls
 
 		~list()
 		{
-				clear();
-				delete _head;
-				_head = nullptr;
+			clear();
+			delete _head;
+			_head = nullptr;
 		}
 
 		void clear()
