@@ -67,7 +67,7 @@ public:
 		{
 			if (cur->_key < key)
 				cur = cur->_right;
-			else if (cur->_key < key)
+			else if (cur->_key > key)
 				cur = cur->_left;
 			else
 				return true;
