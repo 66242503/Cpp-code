@@ -107,9 +107,48 @@ void test_map()
 	cout << endl;
 }
 
+
+void test_multiset()
+{
+	// ÔÊĞí¼üÖµÈßÓà
+	multiset<int> ms;
+	ms.insert(1);
+	ms.insert(1);
+	ms.insert(2);
+	ms.insert(3);
+	ms.insert(2);
+	ms.insert(4);
+
+	for (auto &e : ms)
+	{
+		cout << e << " ";
+	}
+	cout << endl;
+}
+
+void test_multimap()
+{
+	// ÔÊĞí¼üÖµÈßÓà
+	multimap<int,int> mm;
+	mm.insert(make_pair(1, 1));
+	mm.insert(make_pair(2, 1));
+	mm.insert(make_pair(3, 1));
+	mm.insert(make_pair(1, 1));
+	mm.insert(make_pair(5, 2));
+	mm.insert(make_pair(6, 1));
+	for (auto &e : mm)
+	{
+		cout << e.first << " : " << e.second << endl;
+	}
+	cout << endl;
+}
+
 int main()
 {
 	// test_set();
-	test_map();
+	// test_map();
+	// test_multiset();
+
+	test_multimap();
 	return 0;
 }
