@@ -88,6 +88,33 @@ public:
 		}
 	}
 
+	void RotateL(Node* parent)
+	{
+		Node* subR = parent->_right;
+		Node* subRL = subR->_left;
+		parent->_right = subRL;
+		if (subRL)
+			subRL->_parent = parent;
+		subR->_left = parent;
+		Node* ppNode = parent->_parent;
+		parent->_parent = subR;
+		
+		// 1.原来parent是树根，现在subR是根
+		if (_root == parent)
+		{
+			_root = subR;
+			subR->_parent = nullptr
+		}
+
+		else
+		{
+			if (ppNode->_left == parent)
+				ppNode->_parent = subR;
+			else
+				ppNode->_right = subR;
+			subR->_parent = ppNode;
+		}
+	}
 private:
 	Node* _root;
 };
