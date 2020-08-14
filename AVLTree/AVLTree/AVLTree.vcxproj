@@ -13,6 +13,9 @@
   <ItemGroup>
     <ClInclude Include="AVLTree.hpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{B19915E9-B951-4F93-BE87-E79558054A01}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>

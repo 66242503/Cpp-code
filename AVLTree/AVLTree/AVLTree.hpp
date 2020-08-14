@@ -1,5 +1,9 @@
 #pragma once
 #include <iostream>
+#include <map>
+#include <cassert>
+#include <algorithm>
+
 template<class K, class V>
 struct AVLTreeNode
 {
@@ -11,31 +15,71 @@ struct AVLTreeNode
 
 	std::pair<K, V> _kv;
 
-	AVLTree(const std::pair<K, V>& kv)
+	AVLTreeNode(const std::pair<K, V>& kv)
 		: _left(nullptr)
 		, _right(nullptr)
 		, _parent(nullptr)
 		, _kv(kv)
 		, _bf(0)
+	{}
 };
 
 template <class K, class V>
 
 class AVLTree
 {
-	typedef AVLTreeNode<K, V> Node;
+	typedef AVLTreeNode<const K, V> Node;
 public:
+	AVLTree() = default;
+
+	//t2(t1)
+	AVLTree(const AVLTree<K, V>& t)
+		:_root(nullptr)
+	{
+		_root = _Copy(t._root);
+	}
+
+	Node* _Copy(Node* root)
+	{
+		if (root == nullptr)
+			return nullptr;
+		Node* newroot = new Node(root->_kv);
+		newroot->_bf = root->_bf;
+		newroot->_left = _Copy(root->_left);
+		newroot->_right = _Copy(root->_right);
+
+		return root;
+	}
+
+	~AVLTree()
+	{
+		_Destory(_root);
+		_root = nullptr;
+	}
+
+	void _Destory(Node* root)
+	{
+		if (root == nullptr)
+			return;
+
+		_Destory(root->_left);
+		_Destory(root->_right);
+
+		delete root;
+	}
+
 	bool Insert(const std::pair<K, V>& kv)
 	{
 		// 1、先按搜索树的规则进行插入
 		if (_root == nullptr)
 		{
 			_root = new Node(kv);
+			_root->_bf = 0;
 			return true;
 		}
 
 		Node* parent = nullptr;
-		Node* cur = root;
+		Node* cur = _root;
 		while (cur)
 		{
 			if (cur->_kv.first > kv.first)
@@ -64,12 +108,13 @@ public:
 			parent->_left = cur;
 			cur->_parent = parent;
 		}
+
 		// 更新平衡因子
 		while (parent)
 		{
 			if (cur == parent->_right)
 				parent->_bf++;
-			else
+			else if (cur == parent->_left)
 				parent->_bf--;
 
 			if (parent->_bf == 0)
@@ -81,6 +126,7 @@ public:
 				cur = parent;
 				parent = parent->_parent;
 			}
+
 			else if (parent->_bf == 2 || parent->_bf == -2)
 			{
 				if (parent->_bf == 2)
@@ -108,11 +154,16 @@ public:
 						RotateLR(parent);
 					}
 				}
+				break;
 			}
 			// 旋转完成后,高度已经恢复
 			// 如果是子树，对上层无影响，更新结束
-			break;
+			else
+			{
+				assert(false);
+			}
 		}
+		return true;
 	}
 
 	void RotateL(Node* parent)
@@ -130,19 +181,19 @@ public:
 		if (_root == parent)
 		{
 			_root = subR;
-			subR->_parent = nullptr
+			subR->_parent = nullptr;
 		}
 		// 2.parent为根的树只是整颗树的子树，如果要改变链接关系，那么subR要顶替它的位置
 		else
 		{
 			if (ppNode->_left == parent)
-				ppNode->_parent = subR;
+				ppNode->_left = subR;
 			else
 				ppNode->_right = subR;
 			subR->_parent = ppNode;
 		}
 
-		parent->_bf = subR->_bf = 0;
+		subR->_bf = parent->_bf = 0;
 	}
 
 	void RotateR(Node* parent)
@@ -165,9 +216,10 @@ public:
 			if (ppNode->_left == parent)
 				ppNode->_left = subL;
 			else
-				ppNode->_parent = ppNode;
+				ppNode->_right = subL;
+			subL->_parent = ppNode;
 		}
-		subL->_bf = parent->_bf = 0;
+		parent->_bf = subL->_bf = 0;
 	}
 
 	void RotateRL(Node* parent)
@@ -206,7 +258,7 @@ public:
 		Node* subLR = subL->_right;
 		int bf = subLR->_bf;
 
-		RotateL(subL);
+		RotateL(parent->_left);
 		RotateR(parent);
 
 		if (bf == 1)
@@ -230,7 +282,74 @@ public:
 		}
 	}
 
+	Node* Find(const K& key)
+	{
+		Node* cur = _root;
+		while (cur)
+		{
+			if (cur->_kv.first < key)
+				cur = cur->_right;
+			else if (cur->_kv.first > key)
+				cur = cur->_left;
+			else
+				return cur;
+		}
+
+		return NULL;
+	}
+
+	void _InOrder(Node* root)
+	{
+		if (root == nullptr)
+			return;
+
+		_InOrder(root->_left);
+		std::cout << root->_kv.first << " ";
+		_InOrder(root->_right);
+	}
+
+	void InOrder()
+	{
+		_InOrder(_root);
+		std::cout << std::endl;
+	}
+	int Height(Node* root)
+	{
+		if (root == nullptr)
+			return 0;
+		return std::max(Height(root->_left), Height(root->_right)) + 1;
+	}
+
+	bool _IsBalance(Node* root)
+	{
+		if (root == nullptr)
+			return true;
+		int leftHeight = Height(root->_left);
+		int rightHeight = Height(root->_right);
+		return abs(leftHeight - rightHeight) < 2
+			&& _IsBalance(root->_left)
+			&& _IsBalance(root->_right);
+	}
+
+	bool IsBalance()
+	{
+		return _IsBalance(_root);
+	}
+
 private:
-	Node* _root;
+	Node* _root = nullptr;
 };
 
+void TestAVLTree()
+{
+	// int a[] = { 16, 3, 7, 11, 9, 26, 18, 14, 15 };
+	int a[] = { 4, 2, 6, 1, 3, 5, 15, 7, 16, 14 };
+	AVLTree<int, int> t;
+	for (auto e : a)
+	{
+		t.Insert(std::make_pair(e, e));
+	}
+	t.InOrder();
+
+	std::cout << t.IsBalance() << std::endl;
+}
