@@ -65,7 +65,43 @@ public:
 		cur->_col = RED;
 		while (parent->_col == RED)
 		{
+			// 红黑色的条件关键看叔叔/uncle
+			Node* grandfather = parent->_parent;
+			if (grandfather->_left == parent)
+			{
+				Node* uncle = grandfather->_right;
+				// 情况1：如果uncle存在且节点为红
+				if (uncle && uncle->_col = RED)
+				{
+					parent->_col = uncle->_col = BLACK;
+					grandfather->_col = BLACK;
+					// 继续往上处理
+					cur = grandfather;
+					parent = cur->_parent;
+				}
+			}
 
+			else
+			{
+				// 双旋->变为单旋
+				if (parent->_parent->_right)
+				{
+					RotateL(parent);
+					std::swap(parent, cur);
+				}
+
+				// 第二种情况，第三种变过来
+				RotateR(grandfather);
+				grandfather->_col = RED;
+				parent->_col = BLACK;
+
+				break;
+			}
+		}
+
+		else
+		{
+			Node* 
 		}
 		return true;
 	}
