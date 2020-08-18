@@ -27,7 +27,7 @@ namespace my_set
 			return  _t.end();
 		}
 
-		bool Insert(const K& k)
+		std::pair<iterator, bool> Insert(const K& k)
 		{
 			return _t.Insert(k);
 		}

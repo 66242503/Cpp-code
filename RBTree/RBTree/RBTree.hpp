@@ -1,5 +1,5 @@
 #pragma once
-
+#include <string>
 #include <iostream>
 
 enum Color
@@ -27,28 +27,28 @@ struct RBTreeNode
 	{}
 };
 
-template <class T>
+template<class T, class Ref, class Ptr>
 struct __TreeItreator
 {
 	typedef RBTreeNode<T> Node;
-	typedef __TreeItreator<T> Self;
+	typedef __TreeItreator<T, Ref, Ptr> Self;
 	Node* _node;
 
 	__TreeItreator(Node* node)
 		:_node(node)
 	{}
 
-	T& operator*()
+	Ref operator*()
 	{
 		return _node->_data;
 	}
 
-	T* operator->()
+	Ptr operator->()
 	{
 		return &_node->_data;
 	}
 
-	Self operator++()
+	Self& operator++()
 	{
 		// 1、如果右不为空，中序的下一个就是右子树的最左节点
 		// 2、如果右为空，表示_node所在的子树已经访问完成,在一个节点在他的祖先中找
@@ -78,9 +78,46 @@ struct __TreeItreator
 		}
 		return *this;
 	}
+
+	Self operator++(int)
+	{
+		Self temp(*this);
+		++(*this);
+		return temp;
+	}
+
 	Self& operator--()
 	{
+		//分三种情况讨论：_node 在head的位置，_node 左子树存在，_node 左子树不存在
+		// 1. _node 在head的位置，--应该将_node放在红黑树中最大节点的位置
+		if (_node->_parent->_parent == _node && _node->_col == RED)
+			_node = _node->_right;
+		else if (_node->_left)
+		{
+			// 2. _node的左子树存在,在左子树中找最大的节点，即左子树中最右侧节点
+			_node = _node->_left;
+			while (_node->_right)
+				_node = _node->_right;
+		}
+		else
+		{
+			// _node的左子树不存在，只能向上找
+			Node* parent = _node->_parent;
+			while (_node == parent->_pLeft)
+			{
+				_node = parent;
+				parent = _node->_parent;
+			}
+			_node = parent;
+		}
 		return *this;
+	}
+
+	Self operator--(int)
+	{
+		Self temp(*this);
+		--(*this);
+		return temp;
 	}
 
 	bool operator !=(const Self& s)
@@ -95,13 +132,12 @@ struct __TreeItreator
 };
 
 template<class K, class T, class KOfT>
-
 class RBTree
 {
 	typedef RBTreeNode<T> Node;
 public:
-	typedef __TreeItreator<T> iterator;
-
+	typedef __TreeItreator<T, T&, T*> iterator;
+	typedef __TreeItreator<T, const T&, const T*> const_iterator;
 	iterator begin()
 	{
 		Node* cur = _root;
@@ -117,14 +153,20 @@ public:
 		return iterator(nullptr);
 	}
 
-	bool Insert(const T& data)
+	// 红黑树是否为空
+	bool Empty()const
+	{
+		return _root == nullptr;
+	}
+
+	std::pair<iterator, bool> Insert(const T& data)
 	{
 		// 1.按搜索树的规则进行插入
 		if (_root == nullptr)
 		{
 			_root = new Node(data);
 			_root->_col = BLACK;
-			return true;
+			return std::make_pair(iterator(_root), true);
 		}
 		KOfT koft;
 		Node* parent = nullptr;
@@ -143,10 +185,11 @@ public:
 			}
 			else
 			{
-				return false;
+				return std::make_pair(iterator(cur), false);
 			}
 		}
 		cur = new Node(data);
+		Node* newnode = cur;
 		if (koft(parent->_data) <  koft(cur->_data))
 		{
 			parent->_right = cur;
@@ -225,7 +268,7 @@ public:
 		}
 
 		_root->_col = BLACK;
-		return true;
+		return std::make_pair(iterator(newnode), true);
 	}
 
 	void RotateL(Node* parent)
@@ -370,18 +413,18 @@ public:
 		{
 			if (koft(cur->_data) < koft(data))
 			{
-				cur->_right;
+				cur = cur->_right;
 			}
 			else if (koft(cur->_data) >  koft(data))
 			{
-				cur->_left;
+				cur = cur->_left;
 			}
 			else
 			{
-				return cur;
+				return iterator(cur);
 			}
 		}
-		return nullptr;
+		return iterator(nullptr);
 	}
 
 private:
