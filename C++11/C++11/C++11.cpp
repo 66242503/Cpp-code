@@ -282,7 +282,7 @@ int main()
 	auto add2 = [=]()->int {return a + b; };
 	add2();
 	// ²»²¶×½
-	auto swap1 = [](int &x1, int &x2)->int
+	auto swap1 = [](int &x1, int &x2)
 	{
 		int x = x1;
 		x1 = x2;
