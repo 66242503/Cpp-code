@@ -42,7 +42,6 @@ int main()
 	return 0;
 }
 #endif
-
 // 智能指针
 int div()
 {
@@ -55,20 +54,34 @@ int div()
 
 void f1()
 {
-	int *p = new int;
-	SmartPtr<int> sp(p);
+	SmartPtr<int> sp1(new int);
+	*sp1 = 10;
+	SmartPtr<pair<int, int>> sp2(new pair<int, int>);
+	sp2->first = 20;
+	sp2->second = 30;
 	cout << div() << endl;
 }
 
+
+//int main()
+//{
+//	try
+//	{
+//		f1();
+//	}
+//	catch (exception& e)
+//	{
+//		cout << e.what() << endl;
+//	}
+//	return 0;
+//}
+
+// 智能指针的坑
 int main()
 {
-	try
-	{
-		f1();
-	}
-	catch (exception& e)
-	{
-		cout << e.what() << endl;
-	}
+	int* p1 = new int;
+	int *p2 = p1;
+	SmartPtr<int> sp1(new int);
+	SmartPtr<int> sp2 = sp1;
 	return 0;
 }
