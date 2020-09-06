@@ -81,7 +81,17 @@ int main()
 {
 	int* p1 = new int;
 	int *p2 = p1;
-	SmartPtr<int> sp1(new int);
-	SmartPtr<int> sp2 = sp1;
+	my_smartptr::auto_ptr<int> ap1(new int);
+	my_smartptr::auto_ptr<int> ap2 = ap1;
+
+	// my_smartptr::unique_ptr<int> up1(new int);
+	// my_smartptr::auto_ptr<int> up2 = up1;
+
+	my_smartptr::shared_ptr<int> sp1(new int);
+	my_smartptr::shared_ptr<int> sp2 = sp1;
+	my_smartptr::shared_ptr<int> sp3(new int);
+	my_smartptr::shared_ptr<int> sp4(sp3);
+	my_smartptr::shared_ptr<int> sp5(sp3);
+
 	return 0;
 }
