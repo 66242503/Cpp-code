@@ -1,4 +1,3 @@
-#include <iostream>
 #include "SmartPtr.h"
 
 using namespace std;
@@ -77,7 +76,7 @@ void f1()
 //}
 
 // 智能指针的坑
-int main()
+void smart_ptr()
 {
 	int* p1 = new int;
 	int *p2 = p1;
@@ -92,6 +91,33 @@ int main()
 	my_smartptr::shared_ptr<int> sp3(new int);
 	my_smartptr::shared_ptr<int> sp4(sp3);
 	my_smartptr::shared_ptr<int> sp5(sp3);
+}
 
+#include <thread>
+// shared_ptr的拷贝赋值时的线程安全问题
+int main()
+{
+	my_smartptr::shared_ptr<int> sp(new int);
+	cout << sp.use_count() << endl;
+	int n = 10000;
+	
+	std::thread t1([&](){
+		for (int i = 0; i < n; i++)
+		{
+			my_smartptr::shared_ptr<int> sp1(sp);
+		}
+	});
+
+	std::thread t2([&](){
+		for (int i = 0; i < n; i++)
+		{
+			my_smartptr::shared_ptr<int> sp2(sp);
+		}
+	});
+
+	t1.join();
+	t2.join();
+
+	cout << sp.use_count() << endl;
 	return 0;
 }

@@ -1,4 +1,6 @@
 #pragma once
+#include <iostream>
+#include <mutex>
 
 // RAII
 template<class T>
@@ -6,7 +8,7 @@ class SmartPtr
 {
 public:
 	SmartPtr(T* ptr)
-		:_ptr(ptr)
+		: _ptr(ptr)
 	{}
 	
 	~SmartPtr()
@@ -56,6 +58,7 @@ namespace my_smartptr
 			{
 				if (_ptr)
 					delete _ptr;
+
 				_ptr = ap._ptr;
 				ap._ptr = nullptr;
 			}
@@ -127,45 +130,82 @@ namespace my_smartptr
 	class shared_ptr
 	{
 	public:
-		shared_ptr(T* ptr)
+		shared_ptr(T* ptr = nullptr)
 			: _ptr(ptr)
 			, _pcount(new int(1))
+			, _pmtx(new mutex)
 		{}
 
-		shared_ptr(shared_ptr<T>& sp)
+		shared_ptr(const shared_ptr<T>& sp)
 			: _ptr(sp._ptr)
 			, _pcount(sp._pcount)
+			, _pmtx(sp._pmtx)
 		{
-			++(*_pcount);
+			add_ref_count();
 		}
-
-		shared_ptr<T>& operator = (shared_ptr<T>& sp)
+		// sp1 = sp4
+		shared_ptr<T>& operator=(const shared_ptr<T>& sp)
 		{
 			if (this != &sp)
 			{
-				if (--(*_pcount) == 0)
-				{
-					delete _pcount;
-					delete _ptr;
-				}
+				// 减引用计数，如果是最后一个管理资源的对象，则释放资源
+				release();
+
+				// 一起管理资源
 				_ptr = sp._ptr;
 				_pcount = sp._pcount;
-				++(*_pcount);
+				_pmtx = sp._pmtx;
+				add_ref_count();
 			}
 			return *this;
 		}
 
-		~shared_ptr()
+		void add_ref_count()
 		{
-			if (--(*_pcount) == 0 && _ptr)
+			_pmtx->lock();
+			++(*_pcount);
+			_pmtx->unlock();
+		}
+
+		void release()
+		{
+			bool flag = false;
+			_pmtx->lock();
+			if (--(*_pcount) == 0)
 			{
-				cout << "delete:" << _ptr << endl;
-				delete _ptr;
-				_ptr = nullptr;
+				if (_ptr)
+				{
+					cout << "delete:" << _ptr << endl;
+					delete _ptr;
+					_ptr = nullptr;
+				}
 
 				delete _pcount;
 				_pcount = nullptr;
+				flag = true;
 			}
+			_pmtx->unlock();
+
+			if (flag == true)
+			{
+				delete _pmtx;
+				_pmtx = nullptr;
+			}
+		}
+
+		~shared_ptr()
+		{
+			release();
+		}
+
+		int use_count()
+		{
+			return *_pcount;
+		}
+
+		T* get_ptr() const
+		{
+			return _ptr;
 		}
 
 		T& operator*()
@@ -180,6 +220,8 @@ namespace my_smartptr
 
 	private:
 		T* _ptr;
-		int *_pcount;
+		// 记录有多少个对象一起管理，最后一个对象释放资源
+		int* _pcount;
+		mutex* _pmtx;
 	};
 }
