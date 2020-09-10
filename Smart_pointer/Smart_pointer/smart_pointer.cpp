@@ -40,7 +40,7 @@ int main()
 	}
 	return 0;
 }
-#endif
+
 // 智能指针
 int div()
 {
@@ -119,5 +119,46 @@ int main()
 	t2.join();
 
 	cout << sp.use_count() << endl;
+	return 0;
+}
+#endif
+
+struct ListNode
+{
+	int val;
+	my_smartptr::shared_ptr<ListNode> _next;
+	my_smartptr::shared_ptr<ListNode> _prev;
+
+	~ListNode()
+	{
+		cout << "~ListNode()" << endl;
+	}
+};
+
+int main()
+{
+	/*
+	ListNode* n1 = new ListNode;
+	ListNode* n2 = new ListNode;
+	n1->_next = n2;
+	n2->_prev = n1;
+
+	delete n1;
+	delete n2;
+	*/
+
+	/*
+	my_smartptr::shared_ptr<ListNode> spn1(new ListNode);
+	my_smartptr::shared_ptr<ListNode> spn2(new ListNode);
+	*/
+
+	my_smartptr::shared_ptr<ListNode> spn1(new ListNode);
+	my_smartptr::shared_ptr<ListNode> spn2(new ListNode);
+	// 循环引用
+	spn1->_next = spn2;
+	spn2->_prev = spn1;
+
+	cout << spn1.use_count() << endl;
+	cout << spn2.use_count() << endl;
 	return 0;
 }

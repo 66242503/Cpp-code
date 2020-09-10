@@ -222,6 +222,38 @@ namespace my_smartptr
 		T* _ptr;
 		// 记录有多少个对象一起管理，最后一个对象释放资源
 		int* _pcount;
-		mutex* _pmtx;
+		std::mutex* _pmtx;
+	};
+
+	// weak_ptr不是智能指针，没有RAII
+	// 专门解决循环引用
+	template<class T>
+	class weak_ptr
+	{
+	public:
+		weak_ptr() = default;
+
+		weak_ptr(const shared_ptr<T>& sp)
+			:_ptr(sp.get_ptr())
+		{}
+
+		weak_ptr<T>operator = (const shared_ptr<T>& sp)
+		{
+			_ptr = sp.get_ptr();
+			return *this;
+		}
+
+		T& operator*()
+		{
+			return *_ptr;
+		}
+
+		T* operator->()
+		{
+			return _ptr;
+		}
+
+	private:
+		T* _ptr;
 	};
 }
